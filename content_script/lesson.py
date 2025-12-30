@@ -59,12 +59,13 @@ def create_lesson_plan(sheet, skills, lesson_id, meta):
     return lesson_plan
 
 
-def create_course_plan(course_name, lesson_plan, course_oer, course_license, editor=False):
+def create_course_plan(course_name, lesson_plan, course_oer, course_license, editor=False, language="en"):
     if not lesson_plan:
         lesson_plan = []
 
     course_plan = {
         "courseName": course_name,
+        "language": language,
         "courseOER": course_oer,
         "courseLicense": course_license,
         "lessons": lesson_plan
@@ -144,7 +145,10 @@ def create_total(default_path, is_local, sheet_names=None, bank_url=None, full_u
 
     sheets_queue = []
     for _, row in url_df.iterrows():
-        course_name, book_url, book_oer, book_license, editor_url, editor_oer, editor_license = row['Book'], row['URL'], row['OER'], row['License'], row['Editor Sheet'], row['Editor OER'], row['Editor License']
+
+        # added language property
+        course_name, course_language, book_url, book_oer, book_license, editor_url, editor_oer, editor_license = row['Book'], row["Language"], row['URL'], row['OER'], row['License'], row['Editor Sheet'], row['Editor OER'], row['Editor License']
+        
         if type(book_url) == str and book_url:
             sheets_queue.append((book_url, False, course_name, book_oer, book_license))
         if type(editor_url) == str and editor_url:
@@ -212,7 +216,7 @@ def create_total(default_path, is_local, sheet_names=None, bank_url=None, full_u
                     lesson_plan.append(lesson)
 
         lesson_plan.sort(key=lambda lesson: sort_lessons(lesson["name"]))
-        course_plan.append(create_course_plan(course_name, lesson_plan, course_oer, course_license, editor=is_editor))
+        course_plan.append(create_course_plan(course_name, lesson_plan, course_oer, course_license, editor=is_editor, language=course_language))
 
     if is_local == 'online' and not full_update:
         # Append everything from the old bkt_params to the new bkt_params

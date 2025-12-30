@@ -98,7 +98,11 @@ def get_all_url(bank_url, is_local):
         hash_df = pd.DataFrame(columns=["Sheet Name", "Content Hash", "Changed Sheets"])
 
     
-    url_df = url_df[["Book", "URL", "OER", "License", "Editor Sheet", "Editor OER", "Editor License"]]
+    # url_df = url_df[["Book", "URL", "OER", "License", "Editor Sheet", "Editor OER", "Editor License"]]
+
+    # add language column to define locale at the textbook level
+    url_df = url_df[["Book", "Language", "URL", "OER", "License", "Editor Sheet", "Editor OER", "Editor License"]]
+
     url_df = url_df.astype(str)
     url_df.replace('', 0.0, inplace=True)
     url_df.replace('nan', 0.0, inplace=True)
