@@ -105,7 +105,7 @@ def get_all_url(bank_url, is_local):
 
     url_df = url_df.astype(str)
 
-
+    url_df['Language'] = url_df['Language'].replace('', 'en')
     for col in url_df.columns:
         if col != "Language":
             url_df[col].replace('', 0.0, inplace=True)
