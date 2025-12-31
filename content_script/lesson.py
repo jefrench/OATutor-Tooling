@@ -150,11 +150,11 @@ def create_total(default_path, is_local, sheet_names=None, bank_url=None, full_u
         course_name, course_language, book_url, book_oer, book_license, editor_url, editor_oer, editor_license = row['Book'], row["Language"], row['URL'], row['OER'], row['License'], row['Editor Sheet'], row['Editor OER'], row['Editor License']
         
         if type(book_url) == str and book_url:
-            sheets_queue.append((book_url, False, course_name, book_oer, book_license))
+            sheets_queue.append((book_url, False, course_name, book_oer, book_license, course_language))
         if type(editor_url) == str and editor_url:
-            sheets_queue.append((editor_url, True, "", editor_oer, editor_license))
+            sheets_queue.append((editor_url, True, "", editor_oer, editor_license, "en"))
             
-    for sheet_url, is_editor, course_name, course_oer, course_license in sheets_queue:
+    for sheet_url, is_editor, course_name, course_oer, course_license, course_language in sheets_queue:
         lesson_plan = []
         if is_editor:
             course_name = "!!Editor Sheet " + hashlib.sha1(str(sheet_url).encode("utf-8")).hexdigest()[:6]
