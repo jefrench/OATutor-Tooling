@@ -104,15 +104,13 @@ def get_all_url(bank_url, is_local):
     url_df = url_df[["Book", "Language", "URL", "OER", "License", "Editor Sheet", "Editor OER", "Editor License"]]
 
     url_df = url_df.astype(str)
-
-    url_df['Language'] = url_df['Language'].replace('', 'en')
+    # url_df['Language'] = url_df['Language'].replace('', 'en')
+    
     for col in url_df.columns:
         if col != "Language":
             url_df[col].replace('', 0.0, inplace=True)
             url_df[col].replace('nan', 0.0, inplace=True)
-    
 
-    
     hash_df = hash_df[["Sheet Name", "Content Hash", "Changed Sheets"]]
     hash_df = hash_df.astype(str)
     hash_df.replace('', 0.0, inplace=True)
