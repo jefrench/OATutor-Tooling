@@ -108,8 +108,8 @@ def get_all_url(bank_url, is_local):
     
     for col in url_df.columns:
         if col != "Language":
-            url_df[col].replace('', 0.0, inplace=True)
-            url_df[col].replace('nan', 0.0, inplace=True)
+            url_df[col] = url_df[col].replace('', 0.0)
+            url_df[col] = url_df[col].replace('nan', 0.0)
 
     hash_df = hash_df[["Sheet Name", "Content Hash", "Changed Sheets"]]
     hash_df = hash_df.astype(str)
