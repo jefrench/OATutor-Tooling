@@ -6,7 +6,7 @@ if __name__ == '__main__':
     # if store on google sheet: python3 final.py "online" <url> <sheet_names>
 
     is_local = sys.argv[1]
-    full_update = False
+    full_update = True
     bank_url = None
     if len(sys.argv) > 2 and sys.argv[2] == "full":
         full_update = True

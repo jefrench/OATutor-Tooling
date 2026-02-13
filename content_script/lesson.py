@@ -242,7 +242,7 @@ def create_total(default_path, is_local, sheet_names=None, bank_url=None, full_u
             hash_sheet = get_sheet_online(URL_SPREADSHEET_KEY).worksheet('Content Hash')
             set_with_dataframe(hash_sheet, changed_df, col=4)
         except Exception as e:
-            print('Fail to clear changed sheets list')
+            print(f'Fail to clear changed sheets list. ERROR: {str(e)}')
     
     if full_update and os.path.isdir(dest_path):
         shutil.rmtree(dest_path)

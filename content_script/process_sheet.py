@@ -51,8 +51,8 @@ def get_sheet_with_retries(book, sheet_name, retries=5, delay=5):
     raise Exception(f"Failed to fetch worksheet '{sheet_name}' after {retries} retries.")
     
 def get_sheet_online(spreadsheet_key, retries=5):
-    scope = ['https://spreadsheets.google.com/feeds']
-    credentials = ServiceAccountCredentials.from_json_keyfile_name("/home/runner/work/oatutor-askoski-705644bfdf34.json", scope)
+    scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("/Users/jenniferkamrin/Documents/git/OATutor/src/tools/sheets-service-account.json", scope)
     gc = gspread.authorize(credentials)
     
     attempt = 0
